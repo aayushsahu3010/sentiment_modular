@@ -13,16 +13,16 @@ from io import BytesIO
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 word2vec = Word2Vec.load("./data/models/WORD2VEC.model")
 
-# text_model = TextModel(3).to(DEVICE)
-# text_model.load_state_dict(torch.load("data/models/RETRAINED_TEXT_MODEL.pt"))
+text_model = TextModel(3).to(DEVICE)
+text_model.load_state_dict(torch.load("data/models/RETRAINED_TEXT_MODEL.pt"))
 
 
-# multimodal_model = MultimodalModel(TextModel(3, True).to(DEVICE), ImageModel(3, 224, True), 3).to(DEVICE)
-# multimodal_model.load_state_dict(torch.load("data/models/MULTIMODAL_MODEL.pt"))
+multimodal_model = MultimodalModel(TextModel(3, True).to(DEVICE), ImageModel(3, 224, True), 3).to(DEVICE)
+multimodal_model.load_state_dict(torch.load("data/models/MULTIMODAL_MODEL.pt"))
 
-# print("Text model prediction")
-# prediction = ut.predict(model=text_model, device=DEVICE, text="", word2vec_model=word2vec, image=None, IMG_SHAPE=None)
-# print(prediction)
+print("Text model prediction")
+prediction = ut.predict(model=text_model, device=DEVICE, text="", word2vec_model=word2vec, image=None, IMG_SHAPE=None)
+print(prediction)
 
 image = Image.open('c:/Users/MourtadaHouari/Downloads/image.jpg').convert("RGB")
 image_model = ImageModel(3, 48).to(DEVICE)
