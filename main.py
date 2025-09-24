@@ -32,9 +32,9 @@ print("Image model prediction")
 prediction = ut.predict(model=image_model, device=DEVICE, text=None, word2vec_model=None, image=image, IMG_SHAPE=48)
 print(prediction)
 
-# print("Multimodal model prediction")
-# prediction = ut.predict(model=multimodal_model, device=DEVICE, text="", word2vec_model=word2vec, image=image, IMG_SHAPE=224)
-# print(prediction)
+print("Multimodal model prediction")
+prediction = ut.predict(model=multimodal_model, device=DEVICE, text="", word2vec_model=word2vec, image=image, IMG_SHAPE=224)
+print(prediction)
 
 
 
