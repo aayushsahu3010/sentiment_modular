@@ -41,15 +41,15 @@ print(prediction)
 app = Flask(__name__)
 
 
-# @app.route("/text", methods=['POST'])
-# def text_analysis():
-#     json_data = request.data.decode('utf-8')
-#     data = json.loads(json_data)
-#     text = data.get('text')
-#     prediction = ut.predict(model=text_model, device=DEVICE, text=text, word2vec_model=word2vec, image=None, IMG_SHAPE=None)
-#     prediction = prediction[0][0].cpu().numpy()
-#     value = {'negative': str(prediction[0]), 'neutral': str(prediction[1]), 'positive': str(prediction[2])}
-#     return {'response': value}
+@app.route("/text", methods=['POST'])
+def text_analysis():
+    json_data = request.data.decode('utf-8')
+    data = json.loads(json_data)
+    text = data.get('text')
+    prediction = ut.predict(model=text_model, device=DEVICE, text=text, word2vec_model=word2vec, image=None, IMG_SHAPE=None)
+    prediction = prediction[0][0].cpu().numpy()
+    value = {'negative': str(prediction[0]), 'neutral': str(prediction[1]), 'positive': str(prediction[2])}
+    return {'response': value}
 
 @app.route("/image", methods=['POST'])
 def image_analysis():
@@ -66,22 +66,22 @@ def image_analysis():
     return {'response': value}
 
 
-@app.route("/multimodal", methods=['POST'])
-def multimodal_analysis():
-    json_data = request.data.decode('utf-8')
-    data = json.loads(json_data)
-    image = data.get('image')
-    decoded_file = base64.b64decode(image)
-    image = Image.open(BytesIO(decoded_file)).convert('RGB')
-    text = data.get('text')
-    prediction = ut.predict(model=multimodal_model, device=DEVICE, text=text, word2vec_model=word2vec, image=image, IMG_SHAPE=224)
-    prediction = prediction[0].cpu().numpy()
-    value = {'negative': str(prediction[0]), 'neutral': str(prediction[1]), 'positive': str(prediction[2])}
-    return {'response': value}
+# @app.route("/multimodal", methods=['POST'])
+# def multimodal_analysis():
+#     json_data = request.data.decode('utf-8')
+#     data = json.loads(json_data)
+#     image = data.get('image')
+#     decoded_file = base64.b64decode(image)
+#     image = Image.open(BytesIO(decoded_file)).convert('RGB')
+#     text = data.get('text')
+#     prediction = ut.predict(model=multimodal_model, device=DEVICE, text=text, word2vec_model=word2vec, image=image, IMG_SHAPE=224)
+#     prediction = prediction[0].cpu().numpy()
+#     value = {'negative': str(prediction[0]), 'neutral': str(prediction[1]), 'positive': str(prediction[2])}
+#     return {'response': value}
 
 
 
 
-# if __name__ == "__main__":  # There is an error on this line
-#     app.run(host='127.0.0.1')
-#     print("test")
+if __name__ == "__main__":  # There is an error on this line
+    app.run(host='127.0.0.1')
+    print("test")
